@@ -14,5 +14,7 @@ namespace ProductsCatalog.Domain
         //***************** FKs & Navigations Props **********************
 
         public ICollection<Product> Products { get; set; } = new HashSet<Product>();
+
+        public ICollection<ProductUpdateLog> productUpdateLogs { get; set; } = new HashSet<ProductUpdateLog>();
     }
 }

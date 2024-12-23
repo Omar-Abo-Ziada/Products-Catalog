@@ -6,6 +6,8 @@
 
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public DateTime CreatedOn { get; set; }
 
         public DateTime StartDate { get; set; }
@@ -26,7 +28,7 @@
 
         public ApplicationUser CreatedBy { get; set; }
 
-        public int CreatedByID { get; set; }
+        public string CreatedByID { get; set; }
 
         //---------------------------------------------------------------
         

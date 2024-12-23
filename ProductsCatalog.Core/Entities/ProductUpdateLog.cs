@@ -15,7 +15,9 @@
         public int ProductID { get; set; }
 
         //---------------------------------------------------------------
-        
-        public string UpdatedBy { get; set; } 
+
+        public ApplicationUser UpdatedBy { get; set; }
+
+        public string UpdatedByID { get; set; }
     }
 }

@@ -3,8 +3,14 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using ProductsCatalog.Application.Services.Category;
+using ProductsCatalog.Application.Services.Product;
+using ProductsCatalog.Application.Services.Product_Image;
+using ProductsCatalog.Application.Services.Products_Logs;
+using ProductsCatalog.Domain;
 using ProductsCatalog.Infrastructure;
 using ProductsCatalog.Infrastructure.Data.Context;
+using ProductsCatalog.Infrastructure.Data.Repositories;
 using System.Text;
 
 namespace ProductsCatalog.Presentaion
@@ -135,6 +141,21 @@ namespace ProductsCatalog.Presentaion
                 .AddDbContext<ApplicationDBContext>(options => options
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+
+            #region Registering Repositories / Services
+
+            builder.Services.AddScoped<IProductRepository, ProductRepository>();
+            builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<IApplicationUserRepository, ApplicationUserRepository>();
+            builder.Services.AddScoped<IProductUpdateLogsRepository, ProductupdateLogsRepository>();
+            builder.Services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
+            builder.Services.AddScoped<IProductService, ProductService>();
+            builder.Services.AddScoped<ICategoryService, CategoryService>();
+            builder.Services.AddScoped<IProductLogsService, ProductLogsService>();
+            builder.Services.AddScoped<IProductImgeService, ProductImgeService>();
+
+            #endregion
 
             var app = builder.Build();
 
