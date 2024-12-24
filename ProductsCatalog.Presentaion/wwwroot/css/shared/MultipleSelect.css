@@ -1,0 +1,54 @@
+﻿.ms-choice > span.placeholder {
+    color: #F3F0EF;
+}
+
+.ms-drop ul > li label span {
+    padding-right: 1rem;
+}
+
+#myMultipleSelect button:not(:disabled), [type=button]:not(:disabled) {
+    height: 2.7rem;
+    background-color: #F3F0EF;
+    border: none;
+    background: #F3F0EF 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    text-align: right;
+    font: normal normal normal 14px / 26px Cairo;
+    color: #150E0B;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 1rem;
+    padding-left: 2.5rem;
+    border: none;
+    cursor: pointer;
+}
+
+.ms-choice > span {
+    padding-top: 0.4rem;
+}
+
+.ms-parent {
+    width:100% !important;
+}
+
+.ms-choice > div.icon-caret {
+    display:none;
+}
+
+    #myMultipleSelect {
+    width: 100%;
+    height: 100%;
+    background: #F3F0EF 0% 0% no-repeat padding-box;
+    border-radius: 12px;
+    text-align: right;
+    font: normal normal normal 14px / 26px Cairo;
+    color: #150E0B;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding-right: 1rem;
+    padding-left: 2.5rem;
+    border: none;
+    cursor: pointer;
+}

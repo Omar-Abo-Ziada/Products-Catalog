@@ -1,12 +1,14 @@
-﻿namespace ProductsCatalog.Application.Services.Category
+﻿using ProductsCatalog.Infrastructure.Data.Repositories;
+
+namespace ProductsCatalog.Application.Services.Category
 {
     public class CategoryService : ICategoryService
     {
-        private readonly ICategoryService categoryService;
+        private readonly ICategoryRepository categoryRepository;
 
-        public CategoryService(ICategoryService categoryService)
+        public CategoryService(ICategoryRepository categoryRepository)
         {
-            this.categoryService = categoryService;
+            this.categoryRepository = categoryRepository;
         }
     }
 }

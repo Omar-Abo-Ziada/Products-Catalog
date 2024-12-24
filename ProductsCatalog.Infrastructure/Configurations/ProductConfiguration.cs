@@ -42,7 +42,9 @@ namespace ProductsCatalog.Infrastructure.Configurations
 
             builder.HasOne(x => x.Category)
                 .WithMany(x => x.Products)
-                .HasForeignKey(x => x.CategoryID).IsRequired(false);
+                .HasForeignKey(x => x.CategoryID).IsRequired(false).OnDelete(DeleteBehavior.SetNull); // this doesn't make the col nullable in db
+
+            //builder.Property(p => p.CategoryID).IsRequired(false); // => need to explicitly mark the CategoryID property as nullable
 
             //---------------------------------------------------------
 
@@ -56,7 +58,7 @@ namespace ProductsCatalog.Infrastructure.Configurations
                          .WithOne(i => i.Product)
                          .HasForeignKey<ProductImage>(i => i.ProductID)
                          .IsRequired(false)
-                         .OnDelete(DeleteBehavior.Cascade);
+                         .OnDelete(DeleteBehavior.NoAction);
 
             //---------------------------------------------------------
 

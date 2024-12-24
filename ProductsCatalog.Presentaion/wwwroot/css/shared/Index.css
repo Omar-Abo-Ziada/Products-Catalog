@@ -1,0 +1,403 @@
+﻿
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: "Cairo", sans-serif;
+    zoom: 80%;
+}
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+        
+p {
+    margin-bottom: 0;
+}
+
+.highlight {
+    border-color: #ff4d4d !important;
+    background-color: #fff0f0 !important;
+    box-shadow: 0 0 8px rgba(255, 77, 77, 0.5) !important;
+}
+
+.modal-backdrop {
+    width: 100%;
+    height: 100%;
+}
+
+.modal.fade {
+    z-index: 1050 !important;
+}
+
+#toggle-sidebar {
+    cursor: pointer;
+    display: none;
+}
+
+.XDesk_sidebar {
+    height: 100%;
+    width: 240px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1030;
+    display: flex;
+    flex-direction: column;
+}
+
+.hidden_sidebar {
+    left: 0%;
+}
+
+.outer_sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+    .outer_sidebar::-webkit-scrollbar {
+        display: none;
+    }
+
+.sidebar_content {
+    list-style: none;
+    margin-left: -31px;
+    flex-grow: 1;
+    margin-top: 1.5rem;
+    margin-right: -40px;
+}
+
+    .sidebar_content img {
+        width: 24px;
+        height: 24px;
+        margin-left: 1rem;
+    }
+
+    .sidebar_content a {
+        text-decoration: none;
+        display: block;
+        padding-right: 1.5rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-radius: 5px;
+        width: 208px;
+        height: 49px;
+        opacity: 1;
+        text-align: right;
+        font: normal normal normal 18px/33px Cairo;
+        letter-spacing: 0px;
+        color: #150E0B;
+    }
+
+        .sidebar_content a:hover:not(.active_sidebar) {
+            text-align: right;
+            font: normal normal normal 18px/33px Cairo;
+            letter-spacing: 0px;
+            color: #150E0B;
+            opacity: 1;
+            width: 208px;
+            height: 49px;
+            background: #dbddde 0% 0% no-repeat padding-box;
+            border-radius: 12px;
+            opacity: 1;
+        }
+
+.active_sidebar {
+    background: #64818F 0% 0% no-repeat padding-box !important;
+    text-align: right;
+    font: normal normal normal 18px/33px Cairo;
+    letter-spacing: 0px;
+    color: #FFFFFF !important;
+    opacity: 1;
+}
+
+.XDesk_content {
+    margin-right: 240px;
+    height: 100%;
+    min-height: 130vh;
+    background: #1c7ae382 0% 0% no-repeat padding-box;
+    opacity: 1;
+}
+
+
+.XDesk_navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #F5F7FA 0% 0% no-repeat padding-box;
+    padding: 0.8rem 2rem;
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+.XDesk_wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: calc(100vh / 0.84)
+}
+
+.XDesk_inner_page {
+    flex-grow: 1;
+    padding: 2rem;
+   /* padding-bottom: 6.5rem;*/
+    min-height: 130vh;
+    height:100%;
+    width:100%;
+    min-width:100%;
+    /*height: calc(100vh / 0.84)*/
+}
+
+.nav_logo {
+    max-width: 327px;
+    cursor: pointer;
+}
+
+.nav_msg {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    margin-left: 1rem;
+}
+
+.nav_logout {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+}
+
+.XDesk_user_info {
+    padding: 1.5rem 1.5rem 0rem 0rem;
+    /*background-color: #4E586D;*/
+    background: #022454 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    max-height: 83.88px;
+    min-height: 83.88px;
+}
+
+.user_role {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 200px;
+    direction: ltr;
+    color: #FFFFFF;
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+.mangment_name {
+    color: #000000;
+    margin-bottom: 0.4rem;
+    font-weight: 400;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #FFFFFF;
+}
+
+
+.XDesk_footer {
+    /*background-color: #E4E7EB;*/
+    background: #F5F7FA 0% 0% no-repeat padding-box;
+    text-align: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+    .XDesk_footer p {
+        color: #14213D;
+        font-size: 0.85rem;
+        font-weight: 400;
+    }
+
+.open_XDesk_sidebar {
+    right: 0 !important;
+}
+
+.reset_rotate {
+    rotate: 0deg !important;
+}
+
+.XDesk_breadcrumbs {
+    display: block;
+    margin-bottom: 1.5rem;
+}
+
+    .XDesk_breadcrumbs a {
+        color: #F6AB3F;
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+    }
+
+
+    .XDesk_breadcrumbs .arrow,
+    .XDesk_breadcrumbs .current {
+        color: #000000;
+        font-weight: 400;
+        font-size: 1rem;
+        margin-left: 0.5rem;
+    }
+
+.inner_search_items_section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-right: 2.5rem;
+}
+
+.search_result {
+    display: flex;
+    justify-content: space-between;
+    background-color: #4E586D;
+    border-radius: 2px;
+    padding: 0.5rem 0.75rem;
+    margin-left: 1.5rem;
+    margin-bottom: 0.4rem;
+}
+
+    .search_result p {
+        color: #ffff;
+        font-size: 0.85rem;
+        font-weight: 400;
+        min-width: 128px;
+        margin-left: 1rem;
+        max-width: 325px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .search_result img {
+        cursor: pointer;
+    }
+
+.search_items_section {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+}
+
+    .search_items_section .search_items_title {
+        color: #000000;
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+        word-wrap: unset;
+    }
+
+.bulk_action_content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.7rem;
+    margin-top: 0.4rem;
+}
+
+    .bulk_action_content.hide {
+        display: none;
+    }
+
+    .bulk_action_content p {
+        color: #1F2933;
+        font-size: 1rem;
+    }
+
+    .bulk_action_content span {
+        color: #52606D !important;
+    }
+
+.bulk_action_btn {
+    /*background: #BD7A0C !important;*/
+    background: #F6AB3F 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029 !important;
+    border-radius: 2px !important;
+    color: #fff !important;
+    padding: 4px 27px 6px 27px;
+    margin-right: 0.75rem;
+}
+
+.unselect_all {
+    color: #1A0DAB;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*Statistics*/
+
+.statistics_card {
+    background: #F5F7FA 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+    padding: 1.5rem;
+    /*height:100%;*/
+}
+
+    .statistics_card .title {
+        color: #000000;
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+/*Statistics*/
+
+/**************************************************/
+/*Download Btn*/
+
+.download_btn {
+    width: 89px;
+    height: 30px;
+    box-shadow: 0px 3px 6px #00000029;
+    border: 1px solid #0452BF;
+    border-radius: 2px;
+    opacity: 1;
+    text-align: center;
+    align-content: center;
+    font: normal normal normal 14px/16px Almarai;
+    letter-spacing: 0px;
+    color: #0452BF !important;
+    position: relative;
+    display: inline-block;
+}
+
+    .download_btn::after {
+        content: 'تحميل';
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .download_btn:hover {
+        background: #0452BF 0% 0% no-repeat padding-box;
+        color: white !important;
+    }
+
+        .download_btn:hover::after {
+            content: 'تحميل';
+        }
+
+/**************************************************/
+
+.sidebar_content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.sidebar_content .logout {
+    margin-top: auto;
+    color: black !important;
+}
+
+/*.logout:hover {
+    background-color: #52575e36;
+    transition: background-color 500ms;
+}*/

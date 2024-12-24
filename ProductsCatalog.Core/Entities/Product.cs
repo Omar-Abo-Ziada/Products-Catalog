@@ -22,7 +22,7 @@
 
         public Category Category { get; set; }
 
-        public int CategoryID { get; set; }
+        public int? CategoryID { get; set; }
 
         //---------------------------------------------------------------
 

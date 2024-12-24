@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+  <g id="vuesax_linear_more-circle" data-name="vuesax/linear/more-circle" transform="translate(-300 -252)">
+    <g id="more-circle">
+      <path id="Vector" d="M10,20A10,10,0,1,0,0,10,10.029,10.029,0,0,0,10,20Z" transform="translate(302 254)" fill="none" stroke="#b59c49" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"/>
+      <path id="Vector-2" data-name="Vector" d="M0,0H24V24H0Z" transform="translate(300 252)" fill="none" opacity="0"/>
+      <circle id="Ellipse_23" data-name="Ellipse 23" cx="5" cy="5" r="5" transform="translate(307 259)" fill="#b59c49"/>
+    </g>
+  </g>
+</svg>

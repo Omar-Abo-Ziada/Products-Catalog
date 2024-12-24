@@ -30,7 +30,7 @@ namespace ProductsCatalog.Infrastructure.Configurations
             builder.HasOne(x => x.Product)
                 .WithOne(x => x.Image)
                 .HasForeignKey<Product>(x => x.ImageID).IsRequired(false)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

@@ -1,0 +1,36 @@
+﻿.XDesk_modal_content {
+    border-radius: 12px;
+    width: 598px !important;
+}
+
+.XDesk_modal_title {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.XDesk_modal_header {
+    border-bottom: none !important;
+    padding: 2rem 2.5rem 1.5rem 2.5rem;
+}
+
+.XDesk_modal_body {
+    border-bottom: none !important;
+    padding: 0rem 2.5rem 1.5rem 2.5rem;
+}
+
+.XDesk_modal_footer {
+    border-top: none !important;
+    padding: 0rem 2.5rem 2rem 2.5rem;
+}
+
+.modal_button {
+    width: 240px;
+    border: 0px;
+    background: #F6AB3F 0% 0% no-repeat padding-box;
+    color: white;
+    padding-top: 12px;
+    padding-bottom: 10px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 2px;
+}

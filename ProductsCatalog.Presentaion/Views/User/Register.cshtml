@@ -1,0 +1,317 @@
+﻿@model ProductsCatalog.Presentaion.View_Models.User.RegisterVM
+
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] -تسجيل حساب جديد</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css"
+          integrity="sha512-usVBAd66/NpVNfBge19gws2j6JZinnca12rAe2l+d+QkLU9fiG02O1X8Q6hepIpr/EYKZvKx/I9WsnujJuOmBA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+    <!-- Multiple Select CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/multiple-select@1.7.0/dist/multiple-select.min.css">
+
+    <!-- Favicon -->
+    <link href="~/Images/Shared/elogo-modified.png" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/CSS/Shared/Loader.css">
+    <link rel="stylesheet" href="~/CSS/Shared/snackbar.css">
+    <link rel="stylesheet" href="~/CSS/Shared/Input.css">
+    <link rel="stylesheet" href="~/CSS/Shared/Index.css">
+    <link rel="stylesheet" href="~/CSS/Shared/XDeskModal.css">
+    <link rel="stylesheet" href="~/CSS/Table/Table.css">
+    <link rel="stylesheet" href="~/CSS/Shared/Sidebar.css">
+    <link rel="stylesheet" href="~/css/Shared/Common.css">
+
+    <!-- Render additional styles from sections -->
+    @* @RenderSection("styles", required: false) *@
+</head>
+<body>
+    <!-- Loader -->
+    <div id="Pageloading">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Sidebar -->
+    @*  <div class="XDesk_sidebar">
+        @* @await Html.PartialAsync("_Sidebar") *@
+    </div>
+
+    <!-- Main Content -->
+    @* <div class="XDesk_content"> *@
+    <section class="vh-100" style="background-color: #eee;">
+        <div class="container h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-lg-12 col-xl-11">
+                    <div class="card text-black" style="border-radius: 25px;">
+                        <div class="card-body p-md-5">
+                            <div class="row justify-content-center">
+                                <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                                    <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">تسجيل حساب جديد</p>
+
+                                    <div class="mx-1 mx-md-4">
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-user fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <input type="text" id="name" class="form-control" />
+                                                <label class="form-label" for="name">الاسم</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <input type="email" id="mail" class="form-control" />
+                                                <label class="form-label" for="mail">البريد الإلكتروني</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <input type="password" id="password" class="form-control" />
+                                                <label class="form-label" for="password">كلمة السر</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="d-flex flex-row align-items-center mb-4">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <div data-mdb-input-init class="form-outline flex-fill mb-0">
+                                                <input type="password" id="repeatedPassword" class="form-control" />
+                                                <label class="form-label" for="repeatedPassword">تأكيد كلمة السر</label>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-check d-flex justify-content-center mb-5">
+                                            <input class="form-check-input me-2" type="checkbox" value="" id="agree" />
+                                            <label class="form-check-label" for="agree" style="margin-right:2rem;">
+                                                أنا أوافق على  <a href="#!">شروط الخدمة</a>
+                                            </label>
+                                        </div>
+
+                                        <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                            <button id="register-btn" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-lg">سجل</button>
+
+                                        </div>
+                                        <p class="small fw-bold mt-2 pt-1 mb-0 mr-3" style="margin-right:1rem;">
+                                            لديك حساب بالفعل؟ <a href="/User/Login"
+                                                                 class="link-danger">قم بتسجيل الدخول</a>
+                                        </p>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                         class="img-fluid" alt="Sample image">
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @* </div> *@
+
+    <!-- jQuery (if needed for some interactions) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Popper.js (for Bootstrap 5) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/js/bootstrap.min.js"></script>
+
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+    <!-- Custom JS -->
+    <script src="~/js/App.js"></script>
+
+    <script>
+        // Loader visibility handling
+        $(window).on('beforeunload', function () {
+            $('#Pageloading').css('visibility', 'visible');
+        });
+
+        window.addEventListener('pageshow', function (event) {
+            if (event.persisted) {
+                $('#Pageloading').css('visibility', 'hidden');
+            }
+        });
+
+        $(document).ajaxStart(function () {
+            $('#Pageloading').css('visibility', 'visible');
+        }).ajaxStop(function () {
+            $('#Pageloading').css('visibility', 'hidden');
+        });
+
+        // Snackbar logic
+        var messageString = null;
+        var notifyStatusVal = null;
+        if (messageString) {
+            Notify(messageString, notifyStatusVal);
+        }
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#register-btn').on('click', function () {
+
+                // Get the values from the input fields
+                const name = $('#name').val();
+                const email = $('#mail').val();
+                const password = $('#password').val();
+                const repeatedPassword = $('#repeatedPassword').val();
+                const agree = $('#agree').is(':checked');
+
+                // Validate the inputs and highlight empty fields
+                let formValid = true;
+
+                if (!name) {
+                    HighlightInput($('#name')[0]); // Highlight the input field
+                    Notify("من فضلك قم بإكمال جميع الحقول." , "Error");
+                    formValid = false; // Set formValid to false to prevent further execution
+                }
+
+                if (!email) {
+                    HighlightInput($('#mail')[0]); // Highlight the input field
+                    Notify("من فضلك قم بإكمال جميع الحقول." , "Error");
+                    formValid = false;
+                }
+
+             const emailRegex = /^[^\s]+[a-zA-Z0-9._%+-]+[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+              if (!emailRegex.test(email)) {
+                Notify("صيغة إيميل غير صحيحة.", "Error");
+                isValid = false;
+                }
+
+                if (!password) {
+                    HighlightInput($('#password')[0]); // Highlight the input field
+                    Notify("من فضلك قم بإكمال جميع الحقول." , "Error");
+                    formValid = false;
+                }
+
+                if (!repeatedPassword) {
+                    HighlightInput($('#repeatedPassword')[0]); // Highlight the input field
+                    Notify("من فضلك قم بإكمال جميع الحقول." , "Error");
+                    formValid = false;
+                }
+
+                // If any required fields are empty, stop the function execution
+                if (!formValid) {
+                    return;
+                }
+
+
+                 // Password validation regex
+                const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\u0040\u0024!%*?&])[A-Za-z\d\u0040\u0024!%*?&]{8,}$/;
+
+
+
+                // Check if the password and repeated password match
+                if (password !== repeatedPassword) {
+                    Notify("كلمة السر غير متطابقة" , "Error");
+                    HighlightInput($('#password')[0]); // Highlight the password input
+                    HighlightInput($('#repeatedPassword')[0]); // Highlight the repeated password input
+                    return; // Stop the function execution
+                }
+
+            if (!passwordRegex.test(password)) {
+                Notify("كلمة السر يجب أن تحتوي على 8 أحرف على الأقل، بما في ذلك حرف كبير، حرف صغير، رقم، ورمز خاص.", "Error");
+                HighlightInput($('#password')[0]); // Highlight the password input
+                return; // Stop the function execution
+            }
+
+
+                if (!agree) {
+                    Notify("يجب أن توافق على الشروط" , "Error");
+                    return; // Stop the function execution
+                }
+
+                debugger;
+
+                  // Prepare data object for AJAX
+            const userDTO = {
+                FirstName: name,
+                Email: email,
+                Password: password,
+                ConfirmPassword: repeatedPassword
+            };
+
+            console.log(userDTO);
+
+        // Send AJAX request
+                 $.ajax({
+                url: '/User/register', // Server endpoint
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(userDTO),
+                success: function (response) {
+                    // Check response status
+                    if (!response.status) {
+                        // Show the error message
+                        Notify(response.message, "Error");
+
+                    } else {
+                        Notify(response.message, "Success");
+
+                        setTimeout(function () {
+                            window.location.href = `${response.redirectUrl}`; 
+                        }, 2000);
+                    }
+                },
+                error: function (xhr) {
+                    Notify("حدث خطأ غير متوقع.", "Error");
+                    // Handle errors if needed
+                }
+            });
+            });
+        });
+
+        // Highlight function to add and remove the highlight class
+        function HighlightInput(inputElement, timeout = 2700) {
+            inputElement.classList.add('highlight'); // Use vanilla JavaScript to add class
+
+            setTimeout(function () {
+                inputElement.classList.remove('highlight'); // Use vanilla JavaScript to remove class
+            }, timeout);
+        }
+
+    </script>
+
+
+</body>
+</html>

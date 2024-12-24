@@ -1,8 +1,95 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "الرئيسية";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+
+@section styles {
+    <link rel="stylesheet" href="~/CSS/Table/Table.css">
+    <link rel="stylesheet" href="~/CSS/Shared/Common.css" />
+}
+
+<main class="XDesk_inner_page">
+    <div class="requests-content">
+
+    </div>
+</main>
+
+@section scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const listItems = document.querySelectorAll(".sidebar_content li a");
+
+            listItems.forEach(link => {
+                link.classList.remove("active_sidebar");
+            });
+
+            const profileLink = document.getElementById("requests");
+            if (profileLink) {
+                profileLink.classList.add("active_sidebar");
+            }
+
+            //----------------------------------------------------------
+
+            initilaizeDataTable();
+
+        });
+
+        var table;
+
+        function initilaizeDataTable() {
+            table = $('#XDesk_general_table').DataTable({
+                "language": {
+                    "info": "عرض _START_ إلى _END_ من _TOTAL_ نتائج",
+                    "search": "بحث:",
+                    "paginate": {
+                        "first": "الأول",
+                        "last": "الأخير",
+                        "next": "التالي",
+                        "previous": "السابق"
+                    },
+                    "infoEmpty": "لا توجد بيانات متاحة",
+                    "lengthMenu": "عرض _MENU_ نتائج",
+                    "infoFiltered": "(تصفية من _MAX_ نتائج)",
+                    "zeroRecords": "لا توجد نتائج مطابقة"
+                },
+                "order": [],
+                "columnDefs": [{
+                    "targets": 'no-sort',
+                    "orderable": false,
+                }],
+                "pageLength": 10,
+                "lengthChange": false,
+                "searching": false,
+                "ordering": false,
+                "paging": true,
+                "autoWidth": false,
+            });
+        }
+
+        function togglePages(clickedTab, requestStatus) {
+            $.ajax({
+                url: '/Request/GetRequestsByStatus',
+                type: 'GET',
+                data: { requestStatus: requestStatus },
+                success: function (data) {
+
+                    if (table) {
+                        table.destroy();
+                    }
+                    $('#requestsTable').html(data);
+                    initilaizeDataTable();
+
+                    $(".tabs-container .col-auto").removeClass("active-tab").addClass("inactive-tab");
+                    $(clickedTab).removeClass("inactive-tab").addClass("active-tab");
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error fetching data: " + error);
+                }
+            });
+        }
+
+        //----------------------------------------------------------
+
+    </script>
+}
