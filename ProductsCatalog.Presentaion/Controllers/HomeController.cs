@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ProductsCatalog.Application.Helpers;
 
 namespace ProductsCatalog.Presentaion.Controllers
 {
@@ -15,7 +16,6 @@ namespace ProductsCatalog.Presentaion.Controllers
 
         public IActionResult Index()
         {
-
             return View();
         }
     }

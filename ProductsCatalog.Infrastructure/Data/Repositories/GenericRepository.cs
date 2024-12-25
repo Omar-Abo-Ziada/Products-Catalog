@@ -4,6 +4,7 @@ using ProductsCatalog.Domain.DTOs.Shared;
 using ProductsCatalog.Domain.Interfaces;
 using ProductsCatalog.Infrastructure.Data.Context;
 using System.Linq.Expressions;
+using ProductsCatalog.Application.Helpers;
 
 namespace ProductsCatalog.Infrastructure.Data.Repositories
 {
@@ -98,57 +99,65 @@ namespace ProductsCatalog.Infrastructure.Data.Repositories
             }
 
         public async Task<PaginatedListDTO<T>> GetPaginatedListAsync(
-               Expression<Func<T, bool>>? filter = null,
-               Func<IQueryable<T>, IIncludableQueryable<T, object>>[]? includes = null,
-               Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
-               bool asNoTracking = true,
-               int page = 1,
-               int pageSize = 10)
+       Expression<Func<T, bool>>? filter = null,
+       Func<IQueryable<T>, IIncludableQueryable<T, object>>[]? includes = null,
+       Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
+       bool asNoTracking = true,
+       int page = 1,
+       int pageSize = 10,
+       bool isDescending = false) // Added isDescending parameter
+        {
+            IQueryable<T> query = dbSet;
+
+            if (asNoTracking)
+            {
+                query = query.AsNoTracking();
+            }
+
+            if (includes != null)
+            {
+                foreach (var include in includes)
                 {
-                    IQueryable<T> query = dbSet;
-
-                    if (asNoTracking)
-                    {
-                        query = query.AsNoTracking();
-                    }
-
-                    if (includes != null)
-                    {
-                        foreach (var include in includes)
-                        {
-                            query = include(query);
-                        }
-                    }
-
-                    if (filter != null)
-                    {
-                        query = query.Where(filter);
-                    }
-
-                    if (orderBy != null)
-                    {
-                        query = orderBy(query);
-                    }
-
-                    int totalItems = await query.CountAsync();
-                    int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
-
-                    page = Math.Clamp(page, 1, totalPages > 0 ? totalPages : 1);
-
-                    var items = await query.Skip((page - 1) * pageSize)
-                                           .Take(pageSize)
-                                           .ToListAsync();
-
-                    return new PaginatedListDTO<T>
-                    {
-                        TotalItems = totalItems,
-                        TotalPages = totalPages,
-                        CurrentPage = page,
-                        PageSize = pageSize,
-                        Items = items
-                    };
-
+                    query = include(query);
                 }
+            }
+
+            if (filter != null)
+            {
+                query = query.Where(filter);
+            }
+
+            // Apply ordering based on isDescending flag
+            if (orderBy != null)
+            {
+                query = orderBy(query);
+            }
+
+            // If isDescending is true, reverse the order by applying a descending order
+            if (isDescending)
+            {
+                query = query.OrderByDescending(x => x); // This is a dummy placeholder; replace with a valid ordering field
+            }
+
+            int totalItems = await query.CountAsync();
+            int totalPages = (int)Math.Ceiling((double)totalItems / pageSize);
+
+            page = Math.Clamp(page, 1, totalPages > 0 ? totalPages : 1);
+
+            var items = await query.Skip((page - 1) * pageSize)
+                                   .Take(pageSize)
+                                   .ToListAsync();
+
+            return new PaginatedListDTO<T>
+            {
+                TotalItems = totalItems,
+                TotalPages = totalPages,
+                CurrentPage = page,
+                PageSize = pageSize,
+                Items = items
+            };
+        }
+
 
         public async Task<ResultDTO> AddAsync(T entity)
         {

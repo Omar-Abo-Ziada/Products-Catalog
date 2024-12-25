@@ -234,22 +234,15 @@
 
             console.log(userDTO);
 
-        // Send AJAX request
                  $.ajax({
-                url: '/User/Login', // Server endpoint
+                url: '/User/Login', 
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify(userDTO),
                 success: function (response) {
-                    // Check response status
                     if (!response.status) {
-                        // Show the error message
                         Notify(response.message, "Error");
 
-                        // Wait for 3 seconds (3000ms) and reload the page
-                        // setTimeout(function () {
-                        //     location.reload(); // Reload the page
-                        // }, 3000);
                     } else {
                         Notify(response.message, "Success");
 
@@ -260,7 +253,6 @@
                 },
                 error: function (xhr) {
                     Notify("حدث خطأ غير متوقع.", "Error");
-                    // Handle errors if needed
                 }
             });
             });

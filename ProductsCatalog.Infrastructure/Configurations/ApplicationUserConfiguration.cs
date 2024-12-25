@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using ProductsCatalog.Domain;
+using System.Collections.Generic;
 
 namespace ProductsCatalog.Infrastructure.Configurations
 {
@@ -35,6 +37,26 @@ namespace ProductsCatalog.Infrastructure.Configurations
                 .WithOne(x => x.UpdatedBy)
                 .HasForeignKey(x => x.UpdatedByID)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            // *************** Seeding Initial Data **********************
+
+            var hasher = new PasswordHasher<ApplicationUser>();
+
+            builder.HasData(
+                    new ApplicationUser
+                    {
+                        Id = "e8d727d7-27c8-4a68-8987-c4a45a9070f4", 
+                        UserName = "omar@gmail.com",
+                        NormalizedUserName = "OMAR@GMAIL.COM",
+                        Email = "omar@gmail.com",
+                        NormalizedEmail = "OMAR@GMAIL.COM",
+                        FirstName = "Omar",
+                        LastName = "Ahmed",
+                        ConcurrencyStamp = "ae92b2cd-ec9f-4f13-b75d-0832fa0d6169",
+                        PasswordHash = hasher.HashPassword(null, "Test@123"),
+                        EmailConfirmed = true,
+                    }
+              );
         }
     }
 }

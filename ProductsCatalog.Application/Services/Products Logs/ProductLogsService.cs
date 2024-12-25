@@ -1,4 +1,4 @@
-﻿using ProductsCatalog.Infrastructure.Data.Repositories;
+﻿using ProductsCatalog.Domain.Interfaces;
 
 namespace ProductsCatalog.Application.Services.Products_Logs
 {

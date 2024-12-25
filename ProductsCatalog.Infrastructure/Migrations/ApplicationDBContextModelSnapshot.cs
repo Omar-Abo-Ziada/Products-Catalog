@@ -150,6 +150,13 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "e8d727d7-27c8-4a68-8987-c4a45a9070f4",
+                            RoleId = "952625cb-623b-4f8e-a426-c9e14ffe41bc"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -245,6 +252,26 @@ namespace ProductsCatalog.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("ApplicationUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "e8d727d7-27c8-4a68-8987-c4a45a9070f4",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "ae92b2cd-ec9f-4f13-b75d-0832fa0d6169",
+                            Email = "omar@gmail.com",
+                            EmailConfirmed = true,
+                            FirstName = "Omar",
+                            LastName = "Ahmed",
+                            LockoutEnabled = false,
+                            NormalizedEmail = "OMAR@GMAIL.COM",
+                            NormalizedUserName = "OMAR@GMAIL.COM",
+                            PasswordHash = "AQAAAAIAAYagAAAAENsgpWCwz7CtTKEL1jOWkHkofVaw4ZlJ96lBdyOITIIwaDyqEWqO4fjqJw7WqvP9nQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "4a3a1b7b-9d80-435e-ac90-1ff6960d6e4c",
+                            TwoFactorEnabled = false,
+                            UserName = "omar@gmail.com"
+                        });
                 });
 
             modelBuilder.Entity("ProductsCatalog.Domain.Entities.Category", b =>
@@ -337,7 +364,7 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.Property<DateTime>("CreatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 24, 1, 38, 14, 536, DateTimeKind.Local).AddTicks(8806));
+                        .HasDefaultValue(new DateTime(2024, 12, 25, 3, 12, 3, 524, DateTimeKind.Local).AddTicks(3649));
 
                     b.Property<bool>("CurrentTimeFiltered")
                         .HasColumnType("bit");
@@ -350,7 +377,7 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.Property<int>("Duration")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageID")
+                    b.Property<int?>("ImageID")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -372,9 +399,372 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.HasIndex("CreatedByID");
 
                     b.HasIndex("ImageID")
-                        .IsUnique();
+                        .IsUnique()
+                        .HasFilter("[ImageID] IS NOT NULL");
 
                     b.ToTable("Products", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            CategoryID = 1,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2840),
+                            CurrentTimeFiltered = false,
+                            Description = "A high-tech smartphone with a powerful processor.",
+                            Duration = 30,
+                            Name = "Smartphone",
+                            Price = 499.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2906)
+                        },
+                        new
+                        {
+                            ID = 2,
+                            CategoryID = 1,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2922),
+                            CurrentTimeFiltered = true,
+                            Description = "A lightweight laptop for professionals.",
+                            Duration = 60,
+                            Name = "Laptop",
+                            Price = 999.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2925)
+                        },
+                        new
+                        {
+                            ID = 3,
+                            CategoryID = 1,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2931),
+                            CurrentTimeFiltered = false,
+                            Description = "Wireless headphones with noise cancellation.",
+                            Duration = 45,
+                            Name = "Headphones",
+                            Price = 199.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2933)
+                        },
+                        new
+                        {
+                            ID = 4,
+                            CategoryID = 2,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2938),
+                            CurrentTimeFiltered = false,
+                            Description = "A thrilling mystery novel.",
+                            Duration = 30,
+                            Name = "Mystery Novel",
+                            Price = 19.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2941)
+                        },
+                        new
+                        {
+                            ID = 5,
+                            CategoryID = 2,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2945),
+                            CurrentTimeFiltered = true,
+                            Description = "A comprehensive science textbook.",
+                            Duration = 45,
+                            Name = "Science Textbook",
+                            Price = 49.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2948)
+                        },
+                        new
+                        {
+                            ID = 6,
+                            CategoryID = 2,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2953),
+                            CurrentTimeFiltered = false,
+                            Description = "A cookbook with delicious recipes.",
+                            Duration = 60,
+                            Name = "Cookbook",
+                            Price = 29.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2955)
+                        },
+                        new
+                        {
+                            ID = 7,
+                            CategoryID = 3,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2960),
+                            CurrentTimeFiltered = true,
+                            Description = "A comfortable cotton T-shirt.",
+                            Duration = 15,
+                            Name = "T-shirt",
+                            Price = 9.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2962)
+                        },
+                        new
+                        {
+                            ID = 8,
+                            CategoryID = 3,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2968),
+                            CurrentTimeFiltered = false,
+                            Description = "Stylish and durable jeans.",
+                            Duration = 45,
+                            Name = "Jeans",
+                            Price = 49.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2970)
+                        },
+                        new
+                        {
+                            ID = 9,
+                            CategoryID = 3,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2975),
+                            CurrentTimeFiltered = true,
+                            Description = "A warm winter jacket.",
+                            Duration = 60,
+                            Name = "Jacket",
+                            Price = 89.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2977)
+                        },
+                        new
+                        {
+                            ID = 10,
+                            CategoryID = 4,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2982),
+                            CurrentTimeFiltered = false,
+                            Description = "A compact microwave oven.",
+                            Duration = 30,
+                            Name = "Microwave",
+                            Price = 99.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2984)
+                        },
+                        new
+                        {
+                            ID = 11,
+                            CategoryID = 4,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(2988),
+                            CurrentTimeFiltered = false,
+                            Description = "A powerful kitchen blender.",
+                            Duration = 45,
+                            Name = "Blender",
+                            Price = 59.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3014)
+                        },
+                        new
+                        {
+                            ID = 12,
+                            CategoryID = 4,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3023),
+                            CurrentTimeFiltered = true,
+                            Description = "Energy-efficient air conditioner.",
+                            Duration = 60,
+                            Name = "Air Conditioner",
+                            Price = 299.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3027)
+                        },
+                        new
+                        {
+                            ID = 13,
+                            CategoryID = 5,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3424),
+                            CurrentTimeFiltered = false,
+                            Description = "A high-quality football for matches.",
+                            Duration = 30,
+                            Name = "Football",
+                            Price = 25.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3430)
+                        },
+                        new
+                        {
+                            ID = 14,
+                            CategoryID = 5,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3439),
+                            CurrentTimeFiltered = false,
+                            Description = "Lightweight and durable tennis racket.",
+                            Duration = 45,
+                            Name = "Tennis Racket",
+                            Price = 79.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3443)
+                        },
+                        new
+                        {
+                            ID = 15,
+                            CategoryID = 5,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3450),
+                            CurrentTimeFiltered = true,
+                            Description = "A non-slip yoga mat for exercises.",
+                            Duration = 60,
+                            Name = "Yoga Mat",
+                            Price = 19.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3453)
+                        },
+                        new
+                        {
+                            ID = 16,
+                            CategoryID = 6,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3460),
+                            CurrentTimeFiltered = false,
+                            Description = "A collectible action figure for kids.",
+                            Duration = 30,
+                            Name = "Action Figure",
+                            Price = 14.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3464)
+                        },
+                        new
+                        {
+                            ID = 17,
+                            CategoryID = 6,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3471),
+                            CurrentTimeFiltered = false,
+                            Description = "A creative building block set.",
+                            Duration = 45,
+                            Name = "Lego Set",
+                            Price = 49.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3475)
+                        },
+                        new
+                        {
+                            ID = 18,
+                            CategoryID = 6,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3482),
+                            CurrentTimeFiltered = true,
+                            Description = "A fun and engaging family board game.",
+                            Duration = 60,
+                            Name = "Board Game",
+                            Price = 29.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3485)
+                        },
+                        new
+                        {
+                            ID = 19,
+                            CategoryID = 7,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3516),
+                            CurrentTimeFiltered = false,
+                            Description = "A wooden dining table for six.",
+                            Duration = 30,
+                            Name = "Dining Table",
+                            Price = 299.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3521)
+                        },
+                        new
+                        {
+                            ID = 20,
+                            CategoryID = 7,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3529),
+                            CurrentTimeFiltered = false,
+                            Description = "An ergonomic chair for office use.",
+                            Duration = 45,
+                            Name = "Office Chair",
+                            Price = 149.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3533)
+                        },
+                        new
+                        {
+                            ID = 21,
+                            CategoryID = 7,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3539),
+                            CurrentTimeFiltered = true,
+                            Description = "A spacious bookshelf for storage.",
+                            Duration = 60,
+                            Name = "Bookshelf",
+                            Price = 89.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3542)
+                        },
+                        new
+                        {
+                            ID = 22,
+                            CategoryID = 8,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3549),
+                            CurrentTimeFiltered = false,
+                            Description = "A long-lasting matte lipstick.",
+                            Duration = 30,
+                            Name = "Lipstick",
+                            Price = 14.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3553)
+                        },
+                        new
+                        {
+                            ID = 23,
+                            CategoryID = 8,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3559),
+                            CurrentTimeFiltered = false,
+                            Description = "A hydrating moisturizer for dry skin.",
+                            Duration = 45,
+                            Name = "Moisturizer",
+                            Price = 24.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3563)
+                        },
+                        new
+                        {
+                            ID = 24,
+                            CategoryID = 8,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3569),
+                            CurrentTimeFiltered = true,
+                            Description = "A refreshing fragrance for daily use.",
+                            Duration = 60,
+                            Name = "Perfume",
+                            Price = 49.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3573)
+                        },
+                        new
+                        {
+                            ID = 25,
+                            CategoryID = 9,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3579),
+                            CurrentTimeFiltered = false,
+                            Description = "A spiral notebook for taking notes.",
+                            Duration = 30,
+                            Name = "Notebook",
+                            Price = 4.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3582)
+                        },
+                        new
+                        {
+                            ID = 26,
+                            CategoryID = 9,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3587),
+                            CurrentTimeFiltered = false,
+                            Description = "A pack of 10 high-quality pens.",
+                            Duration = 45,
+                            Name = "Pen Set",
+                            Price = 9.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3592)
+                        },
+                        new
+                        {
+                            ID = 27,
+                            CategoryID = 9,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3623),
+                            CurrentTimeFiltered = true,
+                            Description = "An organizer planner for daily tasks.",
+                            Duration = 60,
+                            Name = "Planner",
+                            Price = 14.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3626)
+                        },
+                        new
+                        {
+                            ID = 28,
+                            CategoryID = 10,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3632),
+                            CurrentTimeFiltered = false,
+                            Description = "A 5kg pack of premium rice.",
+                            Duration = 30,
+                            Name = "Rice",
+                            Price = 19.99m,
+                            StartDate = new DateTime(2024, 12, 26, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3635)
+                        },
+                        new
+                        {
+                            ID = 29,
+                            CategoryID = 10,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3642),
+                            CurrentTimeFiltered = false,
+                            Description = "A bottle of extra virgin olive oil.",
+                            Duration = 45,
+                            Name = "Olive Oil",
+                            Price = 9.99m,
+                            StartDate = new DateTime(2024, 12, 27, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3645)
+                        },
+                        new
+                        {
+                            ID = 30,
+                            CategoryID = 10,
+                            CreatedOn = new DateTime(2024, 12, 25, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3652),
+                            CurrentTimeFiltered = true,
+                            Description = "A 1kg pack of Arabica coffee beans.",
+                            Duration = 60,
+                            Name = "Coffee Beans",
+                            Price = 14.99m,
+                            StartDate = new DateTime(2024, 12, 28, 3, 12, 3, 527, DateTimeKind.Local).AddTicks(3656)
+                        });
                 });
 
             modelBuilder.Entity("ProductsCatalog.Domain.Entities.ProductImage", b =>
@@ -429,7 +819,7 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.Property<DateTime>("UpdatedOn")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 12, 24, 1, 38, 14, 540, DateTimeKind.Local).AddTicks(1565));
+                        .HasDefaultValue(new DateTime(2024, 12, 25, 3, 12, 3, 531, DateTimeKind.Local).AddTicks(5425));
 
                     b.HasKey("ID");
 
@@ -506,7 +896,7 @@ namespace ProductsCatalog.Infrastructure.Migrations
                     b.HasOne("ProductsCatalog.Domain.Entities.ProductImage", "Image")
                         .WithOne("Product")
                         .HasForeignKey("ProductsCatalog.Domain.Entities.Product", "ImageID")
-                        .OnDelete(DeleteBehavior.NoAction);
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.Navigation("Category");
 

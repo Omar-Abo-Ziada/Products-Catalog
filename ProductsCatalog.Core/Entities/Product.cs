@@ -10,7 +10,7 @@
 
         public DateTime CreatedOn { get; set; }
 
-        public DateTime StartDate { get; set; }
+            public DateTime StartDate { get; set; }
 
         public int Duration { get; set; }
 
@@ -34,7 +34,7 @@
         
         public ProductImage Image { get; set; }
 
-        public int ImageID { get; set; }
+        public int? ImageID { get; set; }
 
         //---------------------------------------------------------------
 

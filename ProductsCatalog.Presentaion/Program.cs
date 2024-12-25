@@ -1,19 +1,13 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
 using ProductsCatalog.Application.Services.Category;
 using ProductsCatalog.Application.Services.Product;
 using ProductsCatalog.Application.Services.Product_Image;
 using ProductsCatalog.Application.Services.Products_Logs;
 using ProductsCatalog.Domain;
-using ProductsCatalog.Infrastructure;
+using ProductsCatalog.Domain.Interfaces;
 using ProductsCatalog.Infrastructure.Data.Context;
 using ProductsCatalog.Infrastructure.Data.Repositories;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 
 namespace ProductsCatalog.Presentaion
 {
@@ -30,7 +24,7 @@ namespace ProductsCatalog.Presentaion
                 .AddDbContext<ApplicationDBContext>(options => options
                 .UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-            #region Registering Repositories / Services
+            #region Registering Repositories / Services / Automapper
 
             builder.Services.AddScoped<IProductRepository, ProductRepository>();
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
@@ -43,6 +37,8 @@ namespace ProductsCatalog.Presentaion
             builder.Services.AddScoped<IProductLogsService, ProductLogsService>();
             builder.Services.AddScoped<IProductImgeService, ProductImgeService>();
 
+            builder.Services.AddAutoMapper(typeof(MappingProfile));
+
             #endregion
 
             #region To Configure Authentication
@@ -50,7 +46,6 @@ namespace ProductsCatalog.Presentaion
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
-                // Configure other options as needed
             })
             .AddEntityFrameworkStores<ApplicationDBContext>()
             .AddDefaultTokenProviders();

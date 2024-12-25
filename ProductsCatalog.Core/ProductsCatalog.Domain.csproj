@@ -7,10 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="DTOs\Images\" />
     <Folder Include="Enums\" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.1.22" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.0" />
   </ItemGroup>
 

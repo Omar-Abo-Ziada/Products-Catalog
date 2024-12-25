@@ -131,19 +131,15 @@ namespace ProductsCatalog.Presentation.Controllers
 
                 await signInManager.SignInWithClaimsAsync(userFromDB, false, claims);
 
-
                 // After sign-in, check if the user is authenticated
                 if (User.Identity.IsAuthenticated)
                 {
-                    return Json(new { status = true, message = "تم تسجيل الدخول بنجاح", redirectUrl = "/Home/Index" });
+                    return Json(new { status = true, message = "تم تسجيل الدخول بنجاح", redirectUrl = "/Product/AllPaginated" });
                 }
                 else
                 {
                     return Json(new { status = false, message = "حدث خطا ما , حاول مجددا" });
                 }
-
-                return Json(new { status = true, message = "تم تسجيل الدخول بنجاح", redirectUrl = "/Home/Index" });
-
             }
             catch (Exception ex)
             {
@@ -162,7 +158,7 @@ namespace ProductsCatalog.Presentation.Controllers
             }
             catch (Exception ex)
             {
-                return RedirectToAction("Home", "Index");
+                return RedirectToAction("Product", "AllPaginated");
             }
         }
 

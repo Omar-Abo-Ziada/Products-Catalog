@@ -1,0 +1,352 @@
+﻿    @using ProductsCatalog.Domain.DTOs.Categories
+    @using ProductsCatalog.Domain.DTOs.Products
+    @using ProductsCatalog.Domain.DTOs.Shared
+    @model CustomResponseDTO<List<ProductsCatalog.Domain.DTOs.Products.ProductDTO>>
+
+@{
+    ViewData["Title"] = "المنتجات";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles {
+    <link rel="stylesheet" href="~/CSS/Shared/Common.css" />
+    <style>
+        body {
+            background: #eee
+        }
+
+        .ratings i {
+            font-size: 16px;
+            color: red
+        }
+
+        .strike-text {
+            color: red;
+            text-decoration: line-through
+        }
+
+        .product-image {
+            width: 100%
+        }
+
+        .dot {
+            height: 7px;
+            width: 7px;
+            margin-left: 6px;
+            margin-right: 6px;
+            margin-top: 3px;
+            background-color: blue;
+            border-radius: 50%;
+            display: inline-block
+        }
+
+        .spec-1 {
+            color: #938787;
+            font-size: 15px
+        }
+
+        h5 {
+            font-weight: 400
+        }
+
+        .para {
+            font-size: 16px
+        }
+    </style>
+}
+
+<main class="XDesk_inner_page">
+    <div class="requests-content">
+        <div class="col-auto mb-4">
+            <div class="select-container">
+                <p class="select-label">تصفية بفئة المنتج</p>
+                <div class="custom-select-wrapper">
+                    <select class="XDesk-select" id="categoriesSelect" name="categoriesSelect">
+                        <option selected value="0">الكل</option>
+                        @if (ViewBag.Categories != null)
+                        {
+                            foreach (CategoryDTO category in ViewBag.Categories)
+                            {
+                                <option value="@category.ID">@category.Name</option>
+                            }
+                        }
+                    </select>
+                    <img class="custom-arrow" src="~/Images/Shared/down-arrow.svg" alt="arrow" />
+                </div>
+            </div>
+        </div>
+
+        @if (User.IsInRole("Admin"))
+        {
+            <div class="col-auto mb-4">
+                <span class="btn main-btn" style="cursor: pointer;" onclick="window.openNewProductModal()">اضافة منتج جديد</span>
+            </div>
+        }
+
+
+        <div>
+            <div id="productsTable">
+                <partial name="_ProductsPaginated" model="Model" />
+            </div>
+        </div>
+    </div>
+
+    <!-- new Product Popup Modal -->
+    <div id="newProductModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-hidden="true">
+        <div class="modal-content" style="width:333px">
+            <div class="row title justify-content-center mb-3">
+                إضافة منتج جديد
+            </div>
+            <div class="row my-2">
+                <div class="select-container">
+                    <p class="select-label">فئة المنتج</p>
+                    <div class="custom-select-wrapper">
+                        <select class="XDesk-select" id="newProductCategory" name="newProductCategory">
+                            <option selected disabled value="0">اختر فئة المنتج</option>
+                            @if (ViewBag.Categories != null)
+                            {
+                                foreach (CategoryDTO category in ViewBag.Categories)
+                                {
+                                    <option value="@category.ID">@category.Name</option>
+                                }
+                            }
+                        </select>
+                        <img class="custom-arrow" src="~/Images/Shared/down-arrow.svg" alt="arrow" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row my-2" style="justify-content: space-evenly;">
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">اسم المنتج</div>
+                    <input type="text" class="XDesk-input" style="width: 100%;" id="new-item-name" placeholder="ادخل اسم المنتج" />
+                </div>
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">وصف المنتج</div>
+                    <input type="text" class="XDesk-input" style="width: 100%;" id="new-item-desc" placeholder="ادخل وصف المنتج" />
+                </div>
+
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">سعر المنتج</div>
+                    <input type="number" class="XDesk-input" style="width: 100%;" id="new-item-price" placeholder="ادخل سعر المنتج" />
+                </div>
+
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">تاريخ إتاحة المنتج</div>
+                    <input type="datetime-local" class="XDesk-input" style="width: 100%;" id="new-item-availability-date" />
+                </div>
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">فترة إتاحة المنتج</div>
+                    <input type="text" class="XDesk-input" style="width: 100%;" id="new-item-duration" placeholder="ادخل فترة إتاحة المنتج" />
+                </div> 
+                
+                <div class="my-2">
+                    <div class="XDesk-input-lapel">صورة المنتج</div>
+                    <input type="file" class="XDesk-input" style="width: 100%;" id="new-item-image" accept="image/*" />
+                    <small class="text-danger" id="image-error" style="display: none;">الصورة غير صالحة (حجم أقل من 2MB)</small>
+                </div>
+            </div>
+
+            <div class="mt-4 text-center">
+                <a class="btn main-btn" onclick="createNewProduct()" style="width:271px;">إضافة </a>
+            </div>
+            <div class="mt-2 text-center">
+                <span class="btn close-btn">العودة</span>
+            </div>
+        </div>
+    </div>
+    <!-- new Asset Popup Modal -->
+
+</main>
+
+@section scripts {
+
+    <script src="~/js/App.js"></script>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+
+                const listItems = document.querySelectorAll(".sidebar_content li a");
+
+                listItems.forEach(link => {
+                    link.classList.remove("active_sidebar");
+                });
+
+                const profileLink = document.getElementById("products");
+                if (profileLink) {
+                    profileLink.classList.add("active_sidebar");
+                }
+
+                //----------------------------------------------------------
+
+                  document.getElementById("categoriesSelect").addEventListener("change", () => {
+                    changePage(1);
+                });
+
+                //----------------------------------------------------------
+
+                InitializeNewProductModal();
+
+            });
+
+                function createNewProduct() {
+            debugger;
+            let isValid = true;
+
+            // Get fields using Vanilla JS
+            const categoryId = document.getElementById("newProductCategory");
+            const name = document.getElementById("new-item-name");
+            const price = document.getElementById("new-item-price");
+            const availabilityDate = document.getElementById("new-item-availability-date");
+            const imageInput = document.getElementById("new-item-image");
+            const desc = document.getElementById("new-item-desc");
+            const duration = document.getElementById("new-item-duration");
+
+             if (!desc.value.trim()) {
+                HighlightInput(desc);
+                isValid = false;
+            }
+
+             if (!duration.value.trim()) {
+                HighlightInput(duration);
+                isValid = false;
+            }
+
+            if (!name.value.trim()) {
+                HighlightInput(name);
+                isValid = false;
+            }
+
+            if (!price.value.trim()) {
+                HighlightInput(price);
+                isValid = false;
+            }
+
+            if (!categoryId.value || categoryId.value === "0") {
+                 HighlightInput(categoryId);
+                isValid = false;
+            }
+
+            if (!availabilityDate.value) {
+                HighlightInput(availabilityDate);
+                isValid = false;
+            }
+
+            if (!imageInput.files || !imageInput.files[0]) {
+                HighlightInput(imageInput);
+                isValid = false;
+            }
+
+            if (!isValid) {
+                Notify("من فضلك قم بتعبئة جميع الحقول.", NotifyStatus.Error);
+                return;  // Prevent form submission if invalid
+            }
+
+            if (isNaN(price.value)) {
+                HighlightInput(price);
+                Notify("من فضلك قم بإدخال سعر صحيح للمنتج.", NotifyStatus.Error);
+                isValid = false;
+                return;  // Prevent form submission if invalid
+            }
+
+            // If all fields are valid, proceed
+            if (isValid) {
+
+                // Prepare FormData to send to the server
+                const formData = new FormData();
+                formData.append("CategoryId", categoryId.value);
+                formData.append("Name", name.value);
+                formData.append("Description", desc.value);
+                formData.append("Duration", duration.value);
+                formData.append("Price", price.value);
+                formData.append("StartDate", availabilityDate.value);
+                formData.append("Image", imageInput.files[0]);
+
+                  $.ajax({
+                    url: '/Product/AddProduct',  // Ensure this is the correct endpoint
+                    type: 'POST',
+                    data: formData,
+                    contentType: false, // Let the browser set the content type for FormData
+                    processData: false, // Prevent jQuery from processing the FormData
+                    success: function (data) {
+                        // Access the message from the server response
+                        if (data.succeeded) {
+                            Notify(data.message, NotifyStatus.Success);
+                        } else {
+                            Notify(data.message, NotifyStatus.Error);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        // Access the error message from the server response
+                        var message = xhr.responseJSON ? xhr.responseJSON.message : "حدث خطأ أثناء إضافة المنتج.";
+                        Notify(message, NotifyStatus.Error);
+                    }
+                });
+
+            }
+        }
+
+
+        // Helper function to reset field styles
+        function resetFieldStyles(inputElements) {
+            inputElements.forEach(input => {
+                input.classList.remove('highlight');
+            });
+        }
+
+
+            function changePage(nextPage) {
+
+               const categoryId = document.getElementById("categoriesSelect").value;
+
+                $.ajax({
+                    url: '/Product/AllPaginatedPartialFiltered',
+                    type: 'GET',
+                    data: {
+                        page: nextPage,
+                        categoryId: categoryId
+                    },
+                    success: function (data) {
+
+                        $('#productsTable').html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error("Error fetching data: " + error);
+                    }
+                });
+            }
+
+               function InitializeNewProductModal() {
+                   debugger;
+                // Get the modal and the close button
+                const modal = document.getElementById("newProductModal");
+                const closeBtn = document.querySelector("#newProductModal .close-btn");
+
+                // Function to open the modal
+                window.openNewProductModal = function () {
+                    modal.style.display = "block";
+                };
+
+                // Close the modal when clicking on the "x" button
+                closeBtn.addEventListener("click", function () {
+                    modal.style.display = "none";
+                });
+
+                // Close the modal if the user clicks outside the modal content
+                window.addEventListener("click", function (event) {
+                    if (event.target === modal) {
+                        modal.style.display = "none";
+                    }
+                });
+
+                window.addEventListener("keydown", function (event) {
+                    if (event.key === "Escape" && modal.style.display === "block") {
+                        modal.style.display = "none";
+                    }
+                });
+            }
+
+            //----------------------------------------------------------
+
+    </script>
+}

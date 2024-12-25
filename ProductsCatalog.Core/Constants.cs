@@ -1,6 +1,6 @@
 ﻿namespace ProductsCatalog.Domain
 {
-    public class Constants
+    public static class Constants
     {
         // Image upload constraints
         public const int MaxImageSize = 1 * 1024 * 1024; // 1MB
@@ -23,5 +23,12 @@
         public const string SuccessMessage = "Operation successful.";
 
         public const string FailureMessage = "Operation failed.";
+
+        //--------------------------------------------------------------
+
+        public static string ProductsImagesRealPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "images", "Products");
+       
+        public static string ProductsImagesRelativePath = "~/images/Products";
+
     }
 }

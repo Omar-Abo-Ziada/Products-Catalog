@@ -26,7 +26,9 @@ namespace ProductsCatalog.Domain.Interfaces
                    Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
                    bool asNoTracking = true,
                    int page = 1,
-                   int pageSize = 10);
+                   int pageSize = 10,
+                   bool isDescending = false
+                        );
 
         public Task<ResultDTO> AddAsync(T entity);
 
