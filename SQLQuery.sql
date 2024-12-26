@@ -1,15 +1,16 @@
---SELECT TOP (1000) [ID]
---      ,[Name]
---      ,[Description]
---      ,[CreatedOn]
---      ,[StartDate]
---      ,[Duration]
---      ,[Price]
---      ,[CurrentTimeFiltered]
---      ,[CategoryID]
---      ,[CreatedByID]
---      ,[ImageID]
---  FROM [ProductsCatalogDB].[dbo].[Products]
+SELECT TOP (1000) [ID]
+      ,[Name]
+      ,[Description]
+      ,[CreatedOn]
+      ,[StartDate]
+      ,[Duration]
+      ,[Price]
+      ,[CurrentTimeFiltered]
+      ,[CategoryID]
+      ,[CreatedByID]
+      ,[ImageID]
+  FROM [ProductsCatalogDB].[dbo].[Products]
+
 
 --  UPDATE Products
 --SET StartDate = '2024-12-20'
